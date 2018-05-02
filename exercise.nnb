@@ -95,6 +95,34 @@
         {
             "language": "markdown",
             "source": [
+                "Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.\n\nYou must implement a solution with a linear runtime complexity and use only constant extra space.\n\n \n\nExample 1:\n\nInput: nums = [2,2,1]\n\nOutput: 1\n\nExample 2:\n\nInput: nums = [4,1,2,1,2]\n\nOutput: 4\n\nExample 3:\n\nInput: nums = [1]\n\nOutput: 1\n\n \n\nConstraints:\n\n1 <= nums.length <= 3 * 104\n-3 * 104 <= nums[i] <= 3 * 104\nEach element in the array appears twice except for one element which appears only once."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar singleNumber = function(nums) {\n    const occurrences = {}\n    nums.forEach(num => {\n        if(occurrences[num]) {\n            delete occurrences[num]\n        } else {\n            occurrences[num] = true\n        }\n    })\n    return +Object.keys(occurrences)[0]\n    \n};"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.\n\n \n\nExample 1:\n\nInput: nums1 = [1,2,2,1], nums2 = [2,2]\nOutput: [2,2]\nExample 2:\n\nInput: nums1 = [4,9,5], nums2 = [9,4,9,8,4]\nOutput: [4,9]\nExplanation: [9,4] is also accepted.\n \n\nConstraints:\n\n1 <= nums1.length, nums2.length <= 1000\n0 <= nums1[i], nums2[i] <= 1000\n \n\nFollow up:\n\nWhat if the given array is already sorted? How would you optimize your algorithm?\nWhat if nums1's size is small compared to nums2's size? Which algorithm is better?\nWhat if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "/**\n * @param {number[]} nums1\n * @param {number[]} nums2\n * @return {number[]}\n */\nvar intersect = function(nums1, nums2) {\n    const nums1Values = {}\n    const nums2Values = {}\n    const answer = []\n    nums1.forEach(num => {\n        if(nums1Values[num]) {\n            nums1Values[num]++\n        } else {\n            nums1Values[num] = 1\n        }\n    })\n    nums2.forEach(num => {\n        if(nums2Values[num]) {\n            nums2Values[num]++\n        } else {\n            nums2Values[num] = 1\n        }\n    })\n    \n    for(const key in nums1Values) {\n        const occurrencesInNums1 = nums1Values[key]\n        const occurrencesInNums2 = nums2Values[key]\n        if(occurrencesInNums2) {\n            const minimalNumber = Math.min(occurrencesInNums1, occurrencesInNums2)\n            for(let i = 0; i < minimalNumber; i++) {\n                answer.push(+key)\n            }\n            \n        }\n    }\n    return answer\n};"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
                 ""
             ],
             "outputs": []
