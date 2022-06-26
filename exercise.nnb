@@ -172,7 +172,7 @@
         {
             "language": "typescript",
             "source": [
-                ""
+                "/**\n * @param {character[][]} board\n * @return {boolean}\n */\nvar isValidSudoku = function(board) {\n    for(let i = 0; i < 9; i++) {\n        const rowElements = {}\n        const colElements = {}\n        for(let j = 0; j < 9; j++) {\n            const rowValue = board[i][j]\n            const colValue = board[j][i]\n            if(rowElements[rowValue]) return false\n            if(colElements[colValue]) return false\n            if(rowValue != '.') rowElements[rowValue] = true\n            if(colValue != '.') colElements[colValue] = true\n            \n        }\n        console.log(JSON.stringify(rowElements))\n        console.log(JSON.stringify(colElements))\n    }\n    for(let i = 1; i <= 7; i+=3) {\n        for(let j = 1; j <= 7; j+=3) {\n            const result = checkAround(board, i, j)\n            if(!result) return false\n        }\n    }\n    return true\n    \n};\n\nconst checkAround = (board, x, y) => {\n    const elements = {}\n    for(let i = -1; i <= 1; i++) {\n        for(let j = -1; j <= 1; j++) {\n            const value = board[x+i][y+j]\n            if(elements[value]) return false\n            if(value != '.') elements[value] = true\n        }\n    }\n    return true\n}"
             ],
             "outputs": []
         }
